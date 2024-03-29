@@ -3,10 +3,9 @@ const connectDB = require("./config/db");
 const cors = require("cors"); // to allow cross-origin requests
 
 const app = express();
-const frontendUrl = process.env.REACT_APP_FRONTEND_URL;
 const corsOrigin =
   process.env.REACT_APP_NODE_ENV === "production"
-    ? frontendUrl
+    ? "https://crowd-up.vercel.app"
     : "http://localhost:3000";
 
 app.use(

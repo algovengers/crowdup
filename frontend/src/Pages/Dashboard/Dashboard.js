@@ -33,10 +33,9 @@ const Dashboard = () => {
   useEffect(() => {
     const nodeEnv = process.env.REACT_APP_NODE_ENV;
     console.log(nodeEnv);
-    const backendUrl = process.env.REACT_APP_BACKEND_URL;
     const baseUrl =
       nodeEnv === "production"
-        ? backendUrl
+        ? "https://crowdup-api.vercel.app"
         : "http://localhost:5000";
     const getUser = async () => {
       try {
