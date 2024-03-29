@@ -10,35 +10,25 @@ Crowd Up is a platform that allows you to get crowd funding for your business or
 
 - Publicise your startup
 
-```
 Publicise your startup to a large audience and get the funding you need to get started.
-```
 
 - See who funded your startup
 
-```
 See who provided funding for your startup and get in touch with them.
-```
 
 - See where your start up stands
 
-```
 See how well your startup is getting funded compared to others on the platform.
-```
 
 ### For the Investors: 
 
 - Get Shares by funding more
 
-```
 Ask for shares and if you want to continue as a working professional in the start up, contact the owner
-```
 
 - Safe and privacy maintenance
 
-```
 Funding will be purely in good hands with payment integration and will be made sure that it reaches the startup owner 
-```
 
 - Go through the top funded startups
 
