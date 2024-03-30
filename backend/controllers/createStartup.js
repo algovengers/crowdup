@@ -1,4 +1,5 @@
 const { Startup } = require("../model/Startup");
+const { User } = require("../model/User");
 
 async function createStartup(req, res) {
   const {
@@ -11,11 +12,14 @@ async function createStartup(req, res) {
     founded,
     logo,
     websiteLink,
+    useruid,
   } = req.body;
 
   // console.log(req.body);
 
-  const { useruid } = req.params;
+  // const { useruid } = req.params;
+
+  console.log(useruid, req.body);
 
   try {
     const user = await User.findOne({ useruid });
@@ -26,7 +30,7 @@ async function createStartup(req, res) {
         report,
         stocks,
         fundsRequired,
-        domain,
+        domain: domain.split(","),
         founded,
         logo,
         websiteLink,
