@@ -17,9 +17,9 @@ async function createStartup(req, res) {
 
   // console.log(req.body);
 
-  // const { useruid } = req.params;
 
-  console.log(useruid, req.body);
+  const { useruid } = req.params;
+
 
   try {
     const user = await User.findOne({ useruid });
