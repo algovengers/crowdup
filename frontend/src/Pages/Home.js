@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { useAuth } from "../Context/AuthContext";
-import HeroSection from "../Components/HeroSection";
+import HeroSection from "../Components/Sections/HeroSection";
 import Navbar from "../Components/Navbar";
-
+import FeaturesSection from "../Components/Sections/FeaturesSection";
+import TeamsSection from "../Components/Sections/TeamsSection";
+import Footer from "../Components/Footer";
+import TopNotch from "../Components/Sections/TopNotch";
 
 const Home = () => {
   const { currentUser } = useAuth();
+
   const page = currentUser ? "/dashboard" : "/signup";
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -31,6 +35,14 @@ const Home = () => {
       />
 
       <HeroSection page={page} />
+
+      <FeaturesSection />
+
+      <TopNotch />
+
+      <TeamsSection />
+
+      <Footer />
     </>
   );
 };

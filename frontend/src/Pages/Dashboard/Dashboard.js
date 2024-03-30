@@ -6,7 +6,7 @@ import { useAuth } from "../../Context/AuthContext";
 import Loading from "../../Components/Loading/Loading";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import Publicise from "./Publicise";
 
 const Dashboard = () => {
   const { currentUser } = useAuth();
@@ -49,8 +49,7 @@ const Dashboard = () => {
         if (!response.data.exists) {
           console.log("User not present in database");
           navigate("/role");
-        }
-        else {
+        } else {
           console.log("User role is already set");
           setRole(response.data.role);
         }
@@ -70,10 +69,15 @@ const Dashboard = () => {
   return (
     <>
       <Sidebar role={role} />
-      <div className="p-6 pt-24 min-h-screen lg:ml-64">
-      <Routes>
-        <Route path="/" element={<DashboardHome role={role} />} />
-      </Routes>
+      <div className="p-4 pt-20 min-h-screen lg:ml-64">
+        <Routes>
+          <Route path="/" element={<DashboardHome role={role} />} />
+          {
+            role === "startup" && (
+              <Route path="/publicise" element={<Publicise />} />
+            )
+          }
+        </Routes>
       </div>
     </>
   );

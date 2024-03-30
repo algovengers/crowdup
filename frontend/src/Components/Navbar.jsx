@@ -6,14 +6,14 @@ const Navbar = ({ activeLink, handleActiveLink, handleMenuToggle, isMenuOpen, pa
     <header>
       <nav className="fixed z-50 mb-5 w-full px-4 lg:px-6 py-2.5 bg-green-500/10 backdrop-blur-xl">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-          <Link to="/" className="flex items-center">
+          <button onClick={() => {window.location.reload()}} className="flex items-center">
             <img
               src="/crowd-up.webp"
               className="mr-0 h-6 p-[0.5] rounded-full bg-green-950 sm:h-9"
               alt="Flowbite Logo"
             />
-            <span class="self-center ml-2 text-xl font-bold tracking-wide whitespace-nowrap text-slate-950">Crowd Up</span>
-          </Link>
+            <span className="self-center ml-2 text-xl font-bold tracking-wide whitespace-nowrap text-slate-950">Crowd Up</span>
+          </button>
           <div className="flex items-center lg:order-2">
             <Link
               to={page}
@@ -78,19 +78,6 @@ const Navbar = ({ activeLink, handleActiveLink, handleMenuToggle, isMenuOpen, pa
                 </li>
                 <li>
                   <a
-                    href="#about"
-                    className={`block py-2 pr-4 pl-3 rounded text-center ${activeLink === "about"
-                      ? "text-white hover:nav-gradient nav-gradient"
-                      : "text-gray-700"
-                      }`}
-                    aria-current="page"
-                    onClick={() => handleActiveLink("about")}
-                  >
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a
                     href="#features"
                     className={`block py-2 pr-4 pl-3 rounded text-center ${activeLink === "features"
                       ? "text-white hover:nav-gradient nav-gradient"
@@ -104,6 +91,19 @@ const Navbar = ({ activeLink, handleActiveLink, handleMenuToggle, isMenuOpen, pa
                 </li>
                 <li>
                   <a
+                    href="#recents"
+                    className={`block py-2 pr-4 pl-3 rounded text-center ${activeLink === "recents"
+                      ? "text-white hover:nav-gradient nav-gradient"
+                      : "text-gray-700"
+                      }`}
+                    aria-current="page"
+                    onClick={() => handleActiveLink("recents")}
+                  >
+                    Recents
+                  </a>
+                </li>
+                <li>
+                  <a
                     href="#team"
                     className={`block py-2 pr-4 pl-3 rounded text-center ${activeLink === "team"
                       ? "text-white hover:nav-gradient nav-gradient"
@@ -113,19 +113,6 @@ const Navbar = ({ activeLink, handleActiveLink, handleMenuToggle, isMenuOpen, pa
                     onClick={() => handleActiveLink("team")}
                   >
                     Team
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#contact"
-                    className={`block py-2 pr-4 pl-3 rounded text-center ${activeLink === "contact"
-                      ? "text-white hover:nav-gradient nav-gradient"
-                      : "text-gray-700"
-                      }`}
-                    aria-current="page"
-                    onClick={() => handleActiveLink("contact")}
-                  >
-                    Contact
                   </a>
                 </li>
               </ul>
@@ -151,18 +138,6 @@ const Navbar = ({ activeLink, handleActiveLink, handleMenuToggle, isMenuOpen, pa
               </li>
               <li>
                 <a
-                  href="#about"
-                  className={`block py-1 px-3 rounded ${activeLink === "about"
-                    ? "text-white hover:nav-gradient nav-gradient"
-                    : "text-gray-700"
-                    }`}
-                  onClick={() => handleActiveLink("about")}
-                >
-                  About
-                </a>
-              </li>
-              <li>
-                <a
                   href="#features"
                   className={`block py-1 px-3 rounded ${activeLink === "features"
                     ? "text-white hover:nav-gradient nav-gradient"
@@ -175,6 +150,18 @@ const Navbar = ({ activeLink, handleActiveLink, handleMenuToggle, isMenuOpen, pa
               </li>
               <li>
                 <a
+                  href="#recents"
+                  className={`block py-1 px-3 rounded ${activeLink === "recents"
+                    ? "text-white hover:nav-gradient nav-gradient"
+                    : "text-gray-700"
+                    }`}
+                  onClick={() => handleActiveLink("recents")}
+                >
+                  Recents
+                </a>
+              </li>
+              <li>
+                <a
                   href="#team"
                   className={`block py-1 px-3 rounded ${activeLink === "team"
                     ? "text-white hover:nav-gradient nav-gradient"
@@ -183,18 +170,6 @@ const Navbar = ({ activeLink, handleActiveLink, handleMenuToggle, isMenuOpen, pa
                   onClick={() => handleActiveLink("team")}
                 >
                   Team
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#contact"
-                  className={`block py-1 px-3 rounded ${activeLink === "contact"
-                    ? "text-white hover:nav-gradient nav-gradient"
-                    : "text-gray-700"
-                    }`}
-                  onClick={() => handleActiveLink("contact")}
-                >
-                  Contact
                 </a>
               </li>
             </ul>
