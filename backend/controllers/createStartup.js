@@ -2,6 +2,7 @@ const { Startup } = require("../model/Startup");
 const { User } = require("../model/User");
 
 async function createStartup(req, res) {
+  console.log(req.body)
   const {
     name,
     description,
@@ -16,11 +17,7 @@ async function createStartup(req, res) {
   } = req.body;
 
   // console.log(req.body);
-
-
-  const { useruid } = req.params;
-
-
+ 
   try {
     const user = await User.findOne({ useruid });
     if (user) {
