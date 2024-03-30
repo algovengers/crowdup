@@ -13,6 +13,8 @@ async function createStartup(req, res) {
     websiteLink,
   } = req.body;
 
+  // console.log(req.body);
+
   const { useruid } = req.params;
 
   try {
