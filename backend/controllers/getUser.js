@@ -1,9 +1,7 @@
-const express = require("express");
-const router = express.Router();
 const { User } = require("../model/User");
 
 //Check if user exists by useruid
-router.get("/getuser/:useruid", async (req, res) => {
+async function getUser(req, res) {
   const { useruid } = req.params;
   try {
     const user = await User.findOne({ useruid });
@@ -17,8 +15,6 @@ router.get("/getuser/:useruid", async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
   }
-});
+}
 
-
-
-module.exports = router;
+module.exports = getUser;
