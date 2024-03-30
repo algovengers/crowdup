@@ -4,12 +4,11 @@ const { Startup } = require("../model/Startup");
 async function isActiveStartup(req, res) {
   const { useruid } = req.params;
   try {
-    const startup = await Startup.findOne({ userid: useruid });
+    const startup = await Startup.findOne({ useruid });
     if (startup) {
-      const active = startup.active;
-      res.status(200).json({ exists: true, active });
+      res.status(200).json({ active: true });
     } else {
-      res.status(200).json({ exists: false });
+      res.status(200).json({ active: false });
     }
   } catch (error) {
     console.log(error);
