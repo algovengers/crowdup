@@ -14,8 +14,7 @@ const TeamsSection = () => {
                 Our Awesome Team
               </h2>
               <p className="font-medium text-gray-800/90">
-                There are many variations of passages of Lorem Ipsum available
-                but the majority have suffered alteration in some form.
+              Our team is made up of talented and passionate individuals who are dedicated to make a helpful platform for startup growth
               </p>
             </div>
           </div>
