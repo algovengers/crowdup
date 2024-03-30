@@ -1,8 +1,6 @@
-const express = require("express");
-const router = express.Router();
 const { User } = require("../model/User");
 
-router.post("/adduser", async (req, res) => {
+async function createUser(req, res) {
   const { useruid, email, name, role } = req.body;
   try {
     const user = new User({ useruid, email, name, role });
@@ -11,6 +9,6 @@ router.post("/adduser", async (req, res) => {
   } catch (error) {
     res.status(500).send(error);
   }
-});
+}
 
-module.exports = router;
+module.exports = createUser;

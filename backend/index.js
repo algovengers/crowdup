@@ -1,6 +1,8 @@
 const express = require("express");
 const connectDB = require("./config/db");
 const cors = require("cors"); // to allow cross-origin requests
+const userRouter = require("./routes/user");
+const startupRouter = require("./routes/startup");
 
 const app = express();
 const corsOrigin =
@@ -22,9 +24,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Define Routes
-app.use("/api/users", require("./routes/createUser"));
-app.use("/api/users", require("./routes/getUser"));
-
+app.use("/api/users", userRouter);
+app.use("/api/startups", startupRouter);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
