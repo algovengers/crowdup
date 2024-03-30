@@ -7,6 +7,7 @@ import Signup from "./Pages/Signup";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Role from "./Pages/Role";
 import NotFound from "./Pages/NotFound";
+import Startup from "./Pages/Startup";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/role" element={<Role />} />
+              <Route path='/startup/id' element={<Startup />} />
               <Route path="/dashboard/*" element={<Dashboard />} />
               <Route path="/*" element={<NotFound />} />
             </Routes>
