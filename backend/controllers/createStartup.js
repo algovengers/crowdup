@@ -18,10 +18,6 @@ async function createStartup(req, res) {
 
   // console.log(req.body);
  
-// I am passing the useruid in the body only 
-  const { useruid } = req.body;
-
-
   try {
     const user = await User.findOne({ useruid });
     if (user) {
