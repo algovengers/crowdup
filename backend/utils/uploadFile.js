@@ -44,7 +44,7 @@ const upload = multer({
 });
 
 async function uploadFiles(req, res, next) {
-  // console.log(req.body);
+  console.log(req.body);
   upload.any()(req, res, async () => {
     const files = req.files;
     console.log(req.files, req.files[0], req.files[1]);
