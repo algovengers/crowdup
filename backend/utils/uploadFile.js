@@ -19,7 +19,7 @@ const storage = new CloudinaryStorage({
       allowed_formats: !file.mimetype.startsWith("image/")
         ? ["pdf"]
         : ["jpg", "jpeg", "png", "gif"],
-      resource_type: "auto",
+      resource_type: !file.mimetype.startsWith("image/") ? "raw" : "image",
     };
   },
 });
@@ -47,7 +47,9 @@ async function uploadFiles(req, res, next) {
   console.log(req.body);
   upload.any()(req, res, async () => {
     const files = req.files;
-    console.log(req.files, req.files[0], req.files[1]);
+
+    // console.log(req.files, req.files[0], req.files[1]);
+
     if (!files) {
       return res.json({ msg: "error file (nofile)" });
     }
@@ -56,11 +58,17 @@ async function uploadFiles(req, res, next) {
       ? [req.files[1], req.files[0]]
       : [req.files[0], req.files[1]];
 
-    console.log("lolo", pdfFile, imageFile);
+
+    // console.log("lolo", pdfFile, imageFile);
+
 
     if (!pdfFile && !imageFile) {
       return res.json({ msg: "error file" });
     }
+
+    req.body.report = pdfFile?.path;
+    req.body.logo = imageFile?.path;
+
     next();
   });
 }

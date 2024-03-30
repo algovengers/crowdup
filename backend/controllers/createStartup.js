@@ -1,5 +1,5 @@
 const { Startup } = require("../model/Startup");
-const {User} = require('../model/User')
+const { User } = require("../model/User");
 
 async function createStartup(req, res) {
   console.log(req.body)
@@ -13,11 +13,14 @@ async function createStartup(req, res) {
     founded,
     logo,
     websiteLink,
+    useruid,
   } = req.body;
 
   // console.log(req.body);
-
+ 
+// I am passing the useruid in the body only 
   const { useruid } = req.body;
+
 
   try {
     const user = await User.findOne({ useruid });
@@ -28,7 +31,7 @@ async function createStartup(req, res) {
         report,
         stocks,
         fundsRequired,
-        domain,
+        domain: domain.split(","),
         founded,
         logo,
         websiteLink,
