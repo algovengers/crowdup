@@ -38,7 +38,7 @@ const InvestorCardInInvestor = ({
   return (
     <>
       <Link
-        to={`sstartup/${_id}`}
+        to={`startup/${_id}`}
         className="sm:p-7 p-6 flex bg-white border-2 border-stone-300 hover:border-emerald-600 duration-75 rounded-xl flex-col relative"
       >
         <div className="flex flex-col sm:flex-row gap-6">
