@@ -69,6 +69,9 @@ const Dashboard = () => {
   const [startupState, setStartupState] = useState("loading");
 
   useEffect(() => {
+    if (role !== "startup") {
+      return;
+    }
     const nodeEnv = process.env.REACT_APP_NODE_ENV;
     const baseUrl =
       nodeEnv === "production"
@@ -83,20 +86,17 @@ const Dashboard = () => {
           }
         );
         console.log(response.data);
-        if (!response.data.exists) {
-          console.log("User not present in database");
-          setStartupState("inactive");
+        if (response.data.status) {
+          setStartupState("active");
         } else {
-          setStartupState(
-            response.data?.active === true ? "active" : "inactive"
-          );
+          setStartupState("inactive");
         }
       } catch (error) {
         console.error(error);
       }
     };
     isActiveStartup();
-  }, [currentUser?.uid]);
+  }, [currentUser?.uid, role]);
 
   if (showLoading) {
     return <Loading />;
@@ -110,7 +110,7 @@ const Dashboard = () => {
           path="/"
           element={<DashboardHome role={role} startupState={startupState} />}
         />
-        {role === "startup" && (
+        {(role === "startup" && startupState === "inactive") && (
           <Route path="/publicise" element={<Publicise />} />
         )}
         {role === "investor" && (

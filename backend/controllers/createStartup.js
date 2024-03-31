@@ -2,7 +2,7 @@ const { Startup } = require("../model/Startup");
 const { User } = require("../model/User");
 
 async function createStartup(req, res) {
-  console.log(req.body)
+  console.log(req.body);
   const {
     name,
     description,
@@ -10,14 +10,14 @@ async function createStartup(req, res) {
     stocks,
     fundsRequired,
     domain,
-    founded,
+    username,
     logo,
     websiteLink,
     useruid,
   } = req.body;
 
   // console.log(req.body);
- 
+
   try {
     const user = await User.findOne({ useruid });
     if (user) {
@@ -28,12 +28,11 @@ async function createStartup(req, res) {
         stocks,
         fundsRequired,
         domain: domain.split(","),
-        founded,
+        username,
         logo,
         websiteLink,
         fundsRecieved: 0,
-        active: true,
-        useruid: user._id,
+        useruid: useruid,
       });
       await startup.save();
       res.send(startup);

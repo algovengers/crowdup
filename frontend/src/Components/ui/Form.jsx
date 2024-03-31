@@ -2,60 +2,61 @@ import axios from "axios";
 import React, { useRef } from "react";
 import { useAuth } from "../../Context/AuthContext";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Loading from "../Loading/Loading";
 
-const Form = () => {
+const Form = ({ setStartupState }) => {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const inputFileRef = useRef(null);
   const imageViewRef = useRef(null);
   const { currentUser } = useAuth();
   const [report, setReport] = useState(null);
   const [logo, setLogo] = useState(null);
+
   const createStartup = (e) => {
     e.preventDefault();
     const nodeEnv = process.env.REACT_APP_NODE_ENV;
-    console.log(nodeEnv);
     const baseUrl =
       nodeEnv === "production"
         ? "https://crowdup-api.vercel.app"
         : "http://localhost:5000";
+
     const name = e.target[0].value;
     const description = e.target[1].value;
     const fundsRequired = e.target[4].value;
     const stocks = e.target[5].value;
     const domain = e.target[6].value;
     const websiteLink = e.target[7].value;
+
     const uploadData = async () => {
+      setLoading(true);
       const formData = new FormData();
       formData.append("report", report);
       formData.append("logo", logo);
       formData.append("useruid", currentUser?.uid);
+      formData.append("username", currentUser?.displayName);
       formData.append("name", name);
       formData.append("description", description);
       formData.append("stocks", stocks);
       formData.append("fundsRequired", fundsRequired);
       formData.append("domain", domain);
-      formData.append("founded", 2023);
       formData.append("websiteLink", websiteLink);
       // formData.append("withCredentials", true);
       try {
-        const response = await axios.post(
-          baseUrl + "/api/startups/create",
-          formData,
-          {
-            withCredentials: true,
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
-        console.log(response.data);
-        if (!response.data.exists) {
-          console.log("User not present in database");
-        } else {
-          console.log("User role is already set");
-          // navigate("/dashboard");
-        }
+        await axios.post(baseUrl + "/api/startups/create", formData, {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        console.log("Startup created successfully");
+        setLoading(false);
+        navigate("/dashboard");
+        window.location.reload();
       } catch (error) {
-        console.error(error);
+        console.log("Startup creation failed");
+        setLoading(false);
       }
     };
     uploadData();
@@ -93,6 +94,10 @@ const Form = () => {
     setReport(e.target.files[0]);
   };
 
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <form onSubmit={createStartup}>
       <div className="w-full flex flex-wrap justify-center pb-6 space-y-6 md:pb-12">
@@ -108,8 +113,8 @@ const Form = () => {
               <input
                 className="flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 ring-green-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                 id="startup-name"
+                required
                 placeholder="InnoviseHub"
-                required=""
               />
             </div>
             <div className="space-y-2">
@@ -123,7 +128,7 @@ const Form = () => {
                 className="flex min-h-[80px] w-full rounded-md border px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 ring-green-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-none h-64"
                 id="description"
                 placeholder="Enter a brief description of your startup."
-                required=""
+                required
               ></textarea>
             </div>
           </div>
@@ -141,7 +146,7 @@ const Form = () => {
                 id="startup-name"
                 accept=".pdf,.doc,.docx,.txt"
                 placeholder="InnoviseHub"
-                required=""
+                required
                 onChange={handlePdf}
               />
             </div>
@@ -163,6 +168,7 @@ const Form = () => {
                 accept="image/*"
                 id="input-file"
                 hidden
+                required
                 ref={inputFileRef}
                 onChange={(e) => uploadImage(e.target.files[0])}
               />
@@ -194,8 +200,9 @@ const Form = () => {
               <input
                 className="flex h-10 w-full rounded-md border px-3 py-2 text-sm ring-green-500 file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                 id="startup-name"
-                placeholder="InnoviseHub"
-                required=""
+                placeholder="1000"
+                required
+                type="number"
               />
               <div></div>
             </div>
@@ -209,8 +216,9 @@ const Form = () => {
               <input
                 className="flex h-10 w-full rounded-md border px-3 py-2 text-sm ring-green-500 file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                 id="startup-name"
-                placeholder="InnoviseHub"
-                required=""
+                placeholder="10000"
+                required
+                type="number"
               />
               <div></div>
             </div>
@@ -226,8 +234,8 @@ const Form = () => {
               <input
                 className="flex ring-green-500 h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                 id="domain"
-                placeholder="example.com"
-                required=""
+                placeholder="Fintech, Health, Tech"
+                required
               />
             </div>
             <div className="space-y-2">
