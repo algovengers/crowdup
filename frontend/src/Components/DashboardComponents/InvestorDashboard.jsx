@@ -95,6 +95,7 @@ const InvestorDashboard = () => {
                   fundsRequired={val.fundsRequired}
                   username={val.username}
                   stocks={val.stocks}
+                  _id={val._id}
                 />
               ))}
           </div>

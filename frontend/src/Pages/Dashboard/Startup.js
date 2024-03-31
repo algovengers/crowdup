@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import StartupPaymentCard from "../../Components/DashboardComponents/StartupPaymentCard.jsx";
 import Tag from "../../Components/DashboardComponents/Tag.jsx";
+import PaymentCard from '../../Components/Payment/PaymentCard.jsx'
 // import Navbar from '../Components/Navbar'
 import Markdown from "react-markdown";
 
@@ -53,6 +54,7 @@ function Startup() {
                   </div>
                 </div>
                 <div className="col-span-1 ">
+                
                   <div className="sticky top-4">
                     <StartupPaymentCard />
                   </div>
