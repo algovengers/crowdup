@@ -6,6 +6,7 @@ import Loading from '../Components/Loading/Loading';
 
 const Role = () => {
   const { currentUser } = useAuth();
+  console.log(currentUser);
   const navigate = useNavigate();
   const [showLoading, setShowLoading] = useState(true);
 
@@ -69,7 +70,8 @@ const Role = () => {
           useruid: currentUser?.uid,
           email: currentUser?.email,
           name: currentUser?.displayName,
-          role: role
+          role: role,
+          photoUrl: currentUser?.photoURL,
         },
         {
           withCredentials: true,

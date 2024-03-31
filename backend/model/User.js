@@ -7,6 +7,7 @@ const userSchema = new Schema({
   name: { type: String },
   role: { type: String, enum: ["startup", "investor"], default: "investor" },
   moneyWallet: { type: Number, default: 0 },
+  photoUrl: { type: String },
 });
 
 exports.User = mongoose.model("User", userSchema);
