@@ -6,7 +6,7 @@ const userSchema = new Schema({
   email: { type: String, required: true, unique: true },
   name: { type: String },
   role: { type: String, enum: ["startup", "investor"], default: "investor" },
-  moneyWallet: { type: Number, default: 0 },
+  moneyWallet: { type: Number, default: 1000000 },
   photoUrl: { type: String },
 });
 
