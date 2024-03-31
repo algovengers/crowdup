@@ -1,5 +1,4 @@
 import React from "react";
-import TopComponent from "../TopComponent";
 
 const TopNotch = () => {
   return (

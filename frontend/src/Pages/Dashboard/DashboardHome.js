@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../Context/AuthContext";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const DashboardHome = ({ role }) => {
   const { currentUser } = useAuth();
@@ -47,7 +46,6 @@ const DashboardHome = ({ role }) => {
 
 function StartupDashboard({ currentUser }) {
   const [startupState, setStartupState] = useState("loading");
-  const navigate = useNavigate();
 
   useEffect(() => {
     const nodeEnv = process.env.REACT_APP_NODE_ENV;
@@ -77,7 +75,7 @@ function StartupDashboard({ currentUser }) {
       }
     };
     isActiveStartup();
-  }, []);
+  }, [currentUser?.uid]);
 
   return (
     <div>

@@ -7,35 +7,35 @@ const Form = () => {
   const inputFileRef = useRef(null);
   const imageViewRef = useRef(null);
   const { currentUser } = useAuth();
-  const [report,setReport] = useState(null)
-  const [logo,setLogo] = useState(null)
-  const createStartup = (e) =>{
-    e.preventDefault()
+  const [report, setReport] = useState(null);
+  const [logo, setLogo] = useState(null);
+  const createStartup = (e) => {
+    e.preventDefault();
     const nodeEnv = process.env.REACT_APP_NODE_ENV;
     console.log(nodeEnv);
     const baseUrl =
       nodeEnv === "production"
         ? "https://crowdup-api.vercel.app"
         : "http://localhost:5000";
-      const name = e.target[0].value
-      const description = e.target[1].value
-      const fundsRequired = e.target[4].value
-      const stocks = e.target[5].value
-      const domain = e.target[6].value
-      const websiteLink = e.target[7].value
+    const name = e.target[0].value;
+    const description = e.target[1].value;
+    const fundsRequired = e.target[4].value;
+    const stocks = e.target[5].value;
+    const domain = e.target[6].value;
+    const websiteLink = e.target[7].value;
     const uploadData = async () => {
-      const formData = new FormData()
-      formData.append('report',report)
-      formData.append('logo',logo)
-      formData.append('useruid',currentUser?.uid)
-      formData.append('name',name)
-      formData.append('description',description)
-      formData.append('stocks',stocks)
-      formData.append('fundsRequired',fundsRequired)
-      formData.append('domain',domain)
-      formData.append('founded',2023)
-      formData.append('websiteLink',websiteLink)
-      formData.append('withCredentials',true)
+      const formData = new FormData();
+      formData.append("report", report);
+      formData.append("logo", logo);
+      formData.append("useruid", currentUser?.uid);
+      formData.append("name", name);
+      formData.append("description", description);
+      formData.append("stocks", stocks);
+      formData.append("fundsRequired", fundsRequired);
+      formData.append("domain", domain);
+      formData.append("founded", 2023);
+      formData.append("websiteLink", websiteLink);
+      formData.append("withCredentials", true);
       try {
         const response = await axios.post(
           baseUrl + "/api/startups/create",
@@ -44,22 +44,21 @@ const Form = () => {
         console.log(response.data);
         if (!response.data.exists) {
           console.log("User not present in database");
-        }
-        else {
+        } else {
           console.log("User role is already set");
           // navigate("/dashboard");
         }
       } catch (error) {
         console.error(error);
       }
-    }
-    uploadData()
-  }
+    };
+    uploadData();
+  };
 
   const uploadImage = (file) => {
     if (!file) return;
-    console.log(file)
-    setLogo(file)
+    console.log(file);
+    setLogo(file);
     let imgLink = URL.createObjectURL(file);
     imageViewRef.current.style.backgroundImage = `url(${imgLink})`;
     imageViewRef.current.textContent = "";
@@ -82,11 +81,11 @@ const Form = () => {
     e.preventDefault();
   };
 
-  const handlePdf = (e) =>{
-    console.log(e)
-    console.log(e.target.files[0])
-    setReport(e.target.files[0])
-  }
+  const handlePdf = (e) => {
+    console.log(e);
+    console.log(e.target.files[0]);
+    setReport(e.target.files[0]);
+  };
 
   return (
     <form onSubmit={createStartup}>

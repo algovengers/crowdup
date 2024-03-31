@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.2",
-    "cloudinary": "^2.1.0",
+    "cloudinary": "1.21.0",
     "config": "^3.3.11",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
