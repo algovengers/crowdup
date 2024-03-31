@@ -32,7 +32,7 @@ const Fundings = () => {
     if (currentUser) {
       getUser();
     }
-  }, [currentUser, fundings]);
+  }, [currentUser]);
 
   return (
     <>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import PaymentCard from "../Payment/PaymentCard";
 
 function StartupPaymentCard() {
   const [percentage, setPercentage] = useState(0);
@@ -16,6 +17,7 @@ function StartupPaymentCard() {
     progress();
     console.log(percentage);
   }, [required, funded, percentage]);
+  const [showModal,setShowModal] = useState(false)
 
 
 
@@ -44,9 +46,8 @@ function StartupPaymentCard() {
       </div>
       {/* <div>bar</div> */}
       <div>
-        <button className="w-full py-3 px-8 bg-yellow-300 rounded">
-          Invest Now
-        </button>
+      <PaymentCard showModal={showModal} setShowModal={setShowModal}  />
+
       </div>
       <div>
         <button className="w-full py-3 px-8 bg-green-300 rounded">
