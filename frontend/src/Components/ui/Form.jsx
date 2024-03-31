@@ -35,11 +35,17 @@ const Form = () => {
       formData.append("domain", domain);
       formData.append("founded", 2023);
       formData.append("websiteLink", websiteLink);
-      formData.append("withCredentials", true);
+      // formData.append("withCredentials", true);
       try {
         const response = await axios.post(
           baseUrl + "/api/startups/create",
-          formData
+          formData,
+          {
+            withCredentials: true,
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
         );
         console.log(response.data);
         if (!response.data.exists) {
@@ -183,7 +189,7 @@ const Form = () => {
                 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 htmlFor="funds-received"
               >
-                Funds Received
+                Funds Required
               </label>
               <input
                 className="flex h-10 w-full rounded-md border px-3 py-2 text-sm ring-green-500 file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
