@@ -44,11 +44,11 @@ const upload = multer({
 });
 
 async function uploadFiles(req, res, next) {
-  console.log(req.body);
+  console.log("vv", req.body);
   upload.any()(req, res, async () => {
     const files = req.files;
 
-    // console.log(req.files, req.files[0], req.files[1]);
+    console.log(req.files, req.files[0], req.files[1]);
 
     if (!files) {
       return res.json({ msg: "error file (nofile)" });
@@ -58,9 +58,7 @@ async function uploadFiles(req, res, next) {
       ? [req.files[1], req.files[0]]
       : [req.files[0], req.files[1]];
 
-
     // console.log("lolo", pdfFile, imageFile);
-
 
     if (!pdfFile && !imageFile) {
       return res.json({ msg: "error file" });
