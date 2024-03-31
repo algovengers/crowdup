@@ -10,6 +10,7 @@ const startupSchema = new Schema({
   stocks: { type: Number },
   fundsRequired: { type: Number },
   domain: [{ type: String }],
+  slogan : {type:String},
   founded: { type: Number, default: () => new Date().getFullYear() },
   logo: { type: String, required: true }, // URL of the image
   websiteLink: { type: String },

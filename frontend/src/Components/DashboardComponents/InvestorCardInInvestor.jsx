@@ -20,7 +20,7 @@ function truncateString(str, num) {
   return str.slice(0, num) + "...";
 }
 
-const InvestorCardInInvestor = ({ params, give, yourself, ig }) => {
+const InvestorCardInInvestor = ({ name,slogan,fundsRequired,fundsRecived,stocks,username }) => {
   return (
     <>
       <Link
@@ -39,7 +39,7 @@ const InvestorCardInInvestor = ({ params, give, yourself, ig }) => {
             <div className="flex w-10/12 flex-col">
               <div className="flex mb-4 flex-col gap-6 sm:gap-4">
                 <h3 className="m-0 break-all text-2xl p-0 line-clamp-1 font-bold text-slate-900 select-none">
-                  Urekathon
+                  {name}
                 </h3>
               </div>
               <div className="flex flex-row gap-10">
@@ -64,7 +64,7 @@ const InvestorCardInInvestor = ({ params, give, yourself, ig }) => {
                           />
                         </svg>
                       </span>
-                      Founder: Subhadeep Roy
+                      Founder: {slogan}
                     </div>
                     <div className="flex items-center">
                       <span className="mr-2 inline-block">
@@ -96,7 +96,7 @@ const InvestorCardInInvestor = ({ params, give, yourself, ig }) => {
                           />
                         </svg>
                       </span>
-                      Stocks: 3000
+                      Stocks: {stocks}
                     </div>
                     <div className="flex items-center">
                       <span className="mr-2 inline-block">
@@ -143,10 +143,10 @@ const InvestorCardInInvestor = ({ params, give, yourself, ig }) => {
             </div>
             <div className="flex flex-row sm:flex-col justify-between sm:justify-normal">
               <span className="bg-emerald-300 text-emerald-950 text-sm font-medium me-2 mb-4 px-2.5 pb-0.5 rounded select-none w-32 h-9 flex justify-center items-center">
-                450000
+                {fundsRequired}
               </span>
               <span className="font-semibold rounded-full bg-slate-950 text-white px-4 py-1 text-green-60 w-32 h-9 flex justify-center items-center">
-                Rs. {formatFunding(9450000)}
+                Rs. {formatFunding(fundsRecived)}
               </span>
             </div>
           </div>
