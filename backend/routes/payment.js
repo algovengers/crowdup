@@ -1,9 +1,12 @@
 const express = require("express");
 const payment = require("../controllers/payment");
 const sendOtp = require("../controllers/sendOtp");
+const { getPaymetntHistory, getInvestorHistory } = require("../controllers/paymentHistory");
 const router = express.Router();
 
 router.post("/getotp", sendOtp);
 router.post("/verifypayment", payment);
+router.get('/history',getPaymetntHistory)
+// router.get('/history', getInvestorHistory)
 
 module.exports = router;
