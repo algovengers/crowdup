@@ -1,19 +1,14 @@
 const { Startup } = require("../model/Startup");
 
 //Check if user exists by useruid
-async function isActiveStartup(req, res) {
+const isActiveStartup = async (req, res) => {
   const { useruid } = req.params;
-  try {
-    const startup = await Startup.findOne({ useruid });
-    if (startup) {
-      res.status(200).json({ active: true });
-    } else {
-      res.status(200).json({ active: false });
-    }
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "Internal server error" });
+  const startup = await Startup.findOne({ useruid });
+  if (startup) {
+    res.status(200).json({ status: true, message: "Startup is active" });
+  } else {
+    res.status(201).json({ status: false, message: "Startup is not active" });
   }
-}
+};
 
 module.exports = isActiveStartup;

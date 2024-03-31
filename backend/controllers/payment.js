@@ -1,5 +1,6 @@
 const { User } = require("../model/User");
 const { Payment } = require("../model/Payment");
+
 const otpStore = require("../config/otpStore");
 const { Startup } = require("../model/Startup");
 const mongoose = require("mongoose");
@@ -31,10 +32,12 @@ async function payment(req, res) {
 
       // *** doing payment
       const pmnt = await Payment.create({
+
         user: user._id,
         startup: startupid,
         amount,
       });
+
       if (pmnt) {
         // checking if user has enough money in wallet
         const user = await User.findOne({ useruid });
@@ -61,6 +64,7 @@ async function payment(req, res) {
           } else {
             res.status(200).json({ msg: "error update startup" });
           }
+
         } else {
           res.status(200).json({ msg: "error update user wallet" });
         }
