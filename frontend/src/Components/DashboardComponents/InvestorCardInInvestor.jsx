@@ -34,6 +34,7 @@ const InvestorCardInInvestor = ({
   domain,
   stocks,
   _id
+  _id
 }) => {
   return (
     <>
