@@ -11,7 +11,7 @@ import Help from "./Help";
 import Documentation from "./Documentation";
 import UpgradeToPro from "./UpgradeToPro";
 import TopStartups from "./TopStartups";
-import AboutStartup from "./AboutStartup";
+import Startup from "./Startup";
 
 const Dashboard = () => {
   const { currentUser } = useAuth();
@@ -117,7 +117,7 @@ const Dashboard = () => {
         {role === "investor" && (
           <>
             <Route path="/topten" element={<TopStartups />} />
-            <Route path="/startup/:id" element={<AboutStartup />} />
+            <Route path="/startup/:id" element={<Startup />} />
           </>
         )}
         <Route path="/support" element={<Help />} />
