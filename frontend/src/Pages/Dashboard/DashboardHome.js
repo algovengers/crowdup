@@ -41,7 +41,7 @@ const DashboardHome = ({ role, startupState }) => {
       {role === "startup" ? (
         <StartupDashboard currentUser={currentUser} startupState={startupState} />
       ) : (
-        <InvestorDashboard currentUser={currentUser} startupState={startupState} />
+        <InvestorDashboard startupState={startupState} />
       )}
       </div>
     </>

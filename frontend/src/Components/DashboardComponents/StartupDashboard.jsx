@@ -8,7 +8,7 @@ const StartupDashboard = ({ currentUser, startupState }) => {
     <div className="mt-3">
       {startupState === "loading" && <Loading />}
       {startupState === "inactive" && (
-        <div class="justify-center">
+        <div className="justify-center">
           <center>
             <Link
               to="/dashboard/publicise"
@@ -17,9 +17,9 @@ const StartupDashboard = ({ currentUser, startupState }) => {
               Publicise your startup
             </Link>
           </center>
-          <center class="mt-10 m-auto">
+          <center className="mt-10 m-auto">
             <svg
-              class="emoji-404 "
+              className="emoji-404 "
               enable-background="new 0 0 226 249.135"
               height="249.135"
               id="Layer_1"
@@ -108,11 +108,11 @@ const StartupDashboard = ({ currentUser, startupState }) => {
                 stroke-width="8"
               />
             </svg>
-            <div class=" tracking-widest mt-4">
-              <span class="text-gray-500 text-6xl block mb-3">
+            <div className=" tracking-widest mt-4">
+              <span className="text-gray-500 text-6xl block mb-3">
                 <span>S A D</span>
               </span>
-              <span class="text-gray-500 text-xl">
+              <span className="text-gray-500 text-xl">
                 Looks like you haven't published your startup yet.
               </span>
             </div>

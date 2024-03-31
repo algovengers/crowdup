@@ -14,6 +14,22 @@ const Form = ({ setStartupState }) => {
   const [report, setReport] = useState(null);
   const [logo, setLogo] = useState(null);
 
+  const getCurrentDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    let month = today.getMonth() + 1;
+    let day = today.getDate();
+
+    if (month < 10) {
+      month = "0" + month;
+    }
+    if (day < 10) {
+      day = "0" + day;
+    }
+
+    return `${year}-${month}-${day}`;
+  };
+
   const createStartup = (e) => {
     e.preventDefault();
     const nodeEnv = process.env.REACT_APP_NODE_ENV;
@@ -28,6 +44,8 @@ const Form = ({ setStartupState }) => {
     const stocks = e.target[5].value;
     const domain = e.target[6].value;
     const websiteLink = e.target[7].value;
+    const slogan = e.target[8].value;
+    const foundedIn = e.target[9].value;
 
     const uploadData = async () => {
       setLoading(true);
@@ -42,6 +60,8 @@ const Form = ({ setStartupState }) => {
       formData.append("fundsRequired", fundsRequired);
       formData.append("domain", domain);
       formData.append("websiteLink", websiteLink);
+      formData.append("slogan", slogan);
+      formData.append("founded", foundedIn);
       // formData.append("withCredentials", true);
       try {
         await axios.post(baseUrl + "/api/startups/create", formData, {
@@ -132,6 +152,7 @@ const Form = ({ setStartupState }) => {
               ></textarea>
             </div>
           </div>
+
           <div className="space-y-4 flex flex-col">
             <div className="space-y-2">
               <label
@@ -231,12 +252,22 @@ const Form = ({ setStartupState }) => {
               >
                 Domain
               </label>
-              <input
-                className="flex ring-green-500 h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              {/*Select dropdown*/}
+              <select
+                className="flex h-10 w-full rounded-md border px-3 py-2 text-sm ring-green-500 file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                 id="domain"
-                placeholder="Fintech, Health, Tech"
                 required
-              />
+              >
+                <option value="Agriculture">Agriculture</option>
+                <option value="Automobile">Automobile</option>
+                <option value="Construction">Construction</option>
+                <option value="Education">Education</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Finance">Finance</option>
+                <option value="Healthcare">Healthcare</option>
+                <option value="Hospitality">Hospitality</option>
+                <option value="IT">IT</option>
+              </select>
             </div>
             <div className="space-y-2">
               <label
@@ -253,6 +284,40 @@ const Form = ({ setStartupState }) => {
             </div>
           </div>
         </div>
+
+        <div className="space-x-4 w-full flex px-4 md:px-6 gap-6 lg:gap-10">
+          <div className="w-full">
+            <label
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              htmlFor="slogan"
+            >
+              Slogan
+            </label>
+            {/*Select dropdown*/}
+            <input
+              className="flex mt-2 w-full rounded-md border px-3 py-2 text-sm ring-green-500 file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              id="slogan"
+              placeholder="Innovate to grow!"
+              required
+            />
+          </div>
+          <div className="w-full">
+            <label
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              htmlFor="founded"
+            >
+              Founded In?
+            </label>
+            <input
+              className="flex mt-2 ring-green-500 h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              id="founded"
+              type="date"
+              required
+              max={getCurrentDate()}
+            />
+          </div>
+        </div>
+
         <div className="container px-4 md:px-6">
           <button className="inline-flex items-center bg-green-500 hover:bg-green-600 transition-all duration-300 ease-in-out justify-center whitespace-nowrap rounded-md text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 w-full">
             Submit

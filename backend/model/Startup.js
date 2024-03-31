@@ -2,9 +2,8 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const startupSchema = new Schema({
-
   useruid: { type: String, required: true, unique: true},
-
+  slogan: { type: String, required: true },
   name: { type: String, required: true },
   description: { type: String, required: true },
   report: { type: String }, // URL of the report we will store in the cloudinary
@@ -12,7 +11,9 @@ const startupSchema = new Schema({
   stocks: { type: Number },
   fundsRequired: { type: Number },
   domain: [{ type: String }],
-  founded: { type: Number, default: () => new Date().getFullYear() },
+  founded: {
+    type: Date, required: true
+  },
   logo: { type: String, required: true }, // URL of the image
   websiteLink: { type: String },
   username: { type: String, required: true },

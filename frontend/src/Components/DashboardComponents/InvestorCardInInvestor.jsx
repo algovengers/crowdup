@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function formatFunding(funding) {
+  console.log(funding);
   if (funding >= 1000000000) {
     return `${(funding / 1000000000).toFixed(2)}B`;
   } else if (funding >= 1000000) {
@@ -14,13 +15,25 @@ function formatFunding(funding) {
 }
 
 function truncateString(str, num) {
+  str = String(str); // Ensure str is a string
   if (str.length <= num) {
     return str;
   }
   return str.slice(0, num) + "...";
 }
 
-const InvestorCardInInvestor = ({ params, give, yourself, ig }) => {
+const InvestorCardInInvestor = ({
+  name,
+  desc,
+  slogan,
+  logo,
+  fundsReq,
+  fundsReceived,
+  username,
+  founded,
+  domain,
+  stocks,
+}) => {
   return (
     <>
       <Link
@@ -32,22 +45,25 @@ const InvestorCardInInvestor = ({ params, give, yourself, ig }) => {
             <div className="hidden w-8 sm:flex rounded-full ">
               <img
                 className="rounded-full h-7 w-7 mt-1"
-                alt="ok"
-                src="/ogog.webp"
+                alt=""
+                src={logo}
               />
             </div>
             <div className="flex w-10/12 flex-col">
               <div className="flex mb-4 flex-col gap-6 sm:gap-4">
                 <h3 className="m-0 break-all text-2xl p-0 line-clamp-1 font-bold text-slate-900 select-none">
-                  Urekathon
+                  {name}
                 </h3>
               </div>
               <div className="flex flex-row gap-10">
                 <div className="gap-4 sm:gap-3 flex flex-1 flex-col">
-                  <p>
-                    Urekathong is avsdvsdv Urekathong is avsdvsdvUrekathong is
-                    avsdvsdvUrekathong is avsdvsdvUrekathong is
-                    avsdvsdvUrekathong is avsdvsdvUrekathong is avsdvsdv
+                  <p
+                    className="line-clamp-1 text-green-600 text-xl font-semibold break-all"
+                  >
+                    {slogan}
+                  </p>
+                  <p className="line-clamp-2 break-all">
+                    {desc}
                   </p>
                   <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-8 m-0">
                     <div className="flex items-center">
@@ -64,7 +80,7 @@ const InvestorCardInInvestor = ({ params, give, yourself, ig }) => {
                           />
                         </svg>
                       </span>
-                      Founder: Subhadeep Roy
+                      Founder: {username}
                     </div>
                     <div className="flex items-center">
                       <span className="mr-2 inline-block">
@@ -96,7 +112,7 @@ const InvestorCardInInvestor = ({ params, give, yourself, ig }) => {
                           />
                         </svg>
                       </span>
-                      Stocks: 3000
+                      Stocks: {stocks}
                     </div>
                     <div className="flex items-center">
                       <span className="mr-2 inline-block">
@@ -135,7 +151,7 @@ const InvestorCardInInvestor = ({ params, give, yourself, ig }) => {
                           </g>
                         </svg>
                       </span>
-                      {truncateString("Eco - Friendly", 20)}
+                     {domain}
                     </div>
                   </div>
                 </div>
@@ -143,10 +159,10 @@ const InvestorCardInInvestor = ({ params, give, yourself, ig }) => {
             </div>
             <div className="flex flex-row sm:flex-col justify-between sm:justify-normal">
               <span className="bg-emerald-300 text-emerald-950 text-sm font-medium me-2 mb-4 px-2.5 pb-0.5 rounded select-none w-32 h-9 flex justify-center items-center">
-                450000
+              ₹ {fundsReq}
               </span>
               <span className="font-semibold rounded-full bg-slate-950 text-white px-4 py-1 text-green-60 w-32 h-9 flex justify-center items-center">
-                Rs. {formatFunding(9450000)}
+                Rs. {formatFunding(fundsReceived)}
               </span>
             </div>
           </div>

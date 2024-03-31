@@ -14,6 +14,8 @@ async function createStartup(req, res) {
     logo,
     websiteLink,
     useruid,
+    founded,
+    slogan,
   } = req.body;
 
   // console.log(req.body);
@@ -33,6 +35,8 @@ async function createStartup(req, res) {
         websiteLink,
         fundsRecieved: 0,
         useruid: useruid,
+        founded,
+        slogan,
       });
       await startup.save();
       res.send(startup);
