@@ -3,7 +3,6 @@ import StartupPaymentCard from "../../Components/DashboardComponents/StartupPaym
 import Tag from "../../Components/DashboardComponents/Tag.jsx";
 // import Navbar from '../Components/Navbar'
 import Markdown from "react-markdown";
-import { Link } from "react-router-dom";
 
 const dummy = `
 # HI *World*

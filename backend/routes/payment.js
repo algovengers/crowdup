@@ -8,5 +8,7 @@ router.post("/getotp", sendOtp);
 router.post("/verifypayment", payment);
 router.get('/history',getPaymetntHistory)
 
+router.get('/history/:id',getPaymetntHistory)
+// router.get('/history', getInvestorHistory)
 
 module.exports = router;

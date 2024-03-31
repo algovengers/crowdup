@@ -5,7 +5,6 @@ import axios from "axios";
 
 const InvestorDashboard = () => {
   const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const nodeEnv = process.env.REACT_APP_NODE_ENV;
     const baseUrl =

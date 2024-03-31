@@ -12,6 +12,7 @@ import Documentation from "./Documentation";
 import UpgradeToPro from "./UpgradeToPro";
 import TopStartups from "./TopStartups";
 import Startup from "./Startup";
+import Fundings from "./Fundings";
 
 const Dashboard = () => {
   const { currentUser } = useAuth();
@@ -114,6 +115,14 @@ const Dashboard = () => {
         {role === "startup" && startupState === "inactive" && (
           <Route path="/publicise" element={<Publicise />} />
         )}
+
+        {
+          // If the user is a startup and the startup is active
+          role === "startup" && startupState === "active" && (
+            <Route path="/fundings" element={<Fundings />} />
+          )
+        }
+
         {role === "investor" && (
           <>
             <Route path="/topten" element={<TopStartups />} />
