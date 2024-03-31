@@ -58,7 +58,7 @@ function Startup() {
               </div>
               <div className="col-span-1 ">
                 <div className="sticky top-4">
-                  <StartupPaymentCard />
+                  <StartupPaymentCard  />
                 </div>
               </div>
             </div>

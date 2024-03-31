@@ -37,7 +37,7 @@ function Explore() {
                     </div>
                     <div className='grid grid-cols-4'>
                         <div className=' col-span-1'>
-                            <Filter />
+                            <Filter data={data} setData={setData} />
                         </div>
                         <div className='col-span-3'>
                             <div className='flex flex-row flex-wrap gap-8 justify-start items-start'>

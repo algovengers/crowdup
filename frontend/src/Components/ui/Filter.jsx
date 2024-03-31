@@ -23,6 +23,7 @@ function Filter({data,setData}) {
         async function getData(){
             const data = await axios.get(baseUrl + '/api/startups/explore?'+params)
             console.log(data)
+            setData(data.data.message)
         }
         getData()
     }
