@@ -1,28 +1,27 @@
-import { Resend } from "resend";
-import getOtp from "../utils/genOtp";
-import otpStore from "../config/otpStore";
+const getOtp = require("../utils/genOtp");
+const otpStore = require("../config/otpStore");
+const { User } = require("../model/User");
+const sendMail = require("../utils/sendMail");
 require("dotenv").config();
-
-const resend = new Resend(process.env.RESEND_KEY);
 
 async function sendOtp(req, res) {
   const { useruid, amount, startupid } = req.body;
   try {
-    const user = await User.findOne(useruid);
+    const user = await User.findOne({ useruid });
     if (user) {
       if (!user.email) {
         return res.status(200).json({ msg: "error user.email" });
       }
       const otp = getOtp();
-      otpStore[user.email] = otp;
+      otpStore[user.email] = { otp, amount, startupid };
 
-      const { data, error } = await resend.emails.send({
-        from: "Hohos <onboarding@resend.dev>",
-        to: [user.email],
-        subject: "Helsacdrld Otpp",
-        html: `<strong>It works! ${otp}</strong>`,
+      const { success } = await sendMail({
+        otp,
+        amount,
+        startupid,
+        email: user.email,
       });
-      if (error) {
+      if (!success) {
         return res.status(200).json({ msg: "error mail send" });
       }
       res.status(200).json({ msg: "success" });

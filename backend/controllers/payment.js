@@ -1,29 +1,66 @@
 const { User } = require("../model/User");
 const { Payment } = require("../model/Payment");
 const otpStore = require("../config/otpStore");
+const { Startup } = require("../model/Startup");
+const mongoose = require("mongoose");
 
 async function payment(req, res) {
-  const { useruid, amount, startupid, otp } = req.body;
+  const { useruid, otp } = req.body;
   try {
-    const user = await User.findOne(useruid);
+    // if user exists
+    const user = await User.findOne({ useruid });
     if (user) {
+      // if email exists (not imp although)
       if (!user.email) {
         return res.status(200).json({ msg: "error user.email" });
       }
-      if (otpStore[user.email] != otp) {
-        return res.status(200).json({ msg: "invalid_otp" });
+      // if otp already sent or not
+      if (!otpStore[user.email]) {
+        return res.status(200).json({ msg: "otp_not_sent" });
       }
-      const payment = await Payment.create({
+
+      // geting rest data from otp store
+      const { otp: storedOtp, amount, startupid } = otpStore[user.email];
+
+      // matching otp
+      if (storedOtp != otp) {
+        return res.status(200).json({ msg: "invalid_otp" });
+      } else {
+        delete otpStore[user.email];
+      }
+
+      // *** doing payment
+      const pmnt = await Payment.create({
         user: user._id,
         startup: startupid,
         amount,
       });
-      if (payment) {
-        const user = await User.findByIdAndUpdate(useruid, {
-          $inc: { moneyWallet: -1 * amount },
-        });
-        if (user) {
-          res.status(200).json({ msg: "success" });
+      if (pmnt) {
+        // checking if user has enough money in wallet
+        const user = await User.findOne({ useruid });
+
+        if (Number(user.moneyWallet) < Number(amount)) {
+          return res.status(200).json({ msg: "not_enough_money" });
+        }
+
+        // reducing moneyWallet of user
+        const data = await User.findOneAndUpdate(
+          { useruid },
+          {
+            $inc: { moneyWallet: -1 * amount },
+          }
+        );
+        if (data) {
+          // inc fundReceived of startup
+          const data2 = await Startup.findByIdAndUpdate(startupid, {
+            $inc: { fundsRecieved: amount },
+          });
+
+          if (data) {
+            res.status(200).json({ msg: "success" });
+          } else {
+            res.status(200).json({ msg: "error update startup" });
+          }
         } else {
           res.status(200).json({ msg: "error update user wallet" });
         }
