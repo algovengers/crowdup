@@ -6,9 +6,9 @@ import {
   useNavigate,
   useLocation,
 } from "react-router-dom";
-import { useAuth } from "../Context/AuthContext";
+import { useAuth } from "../../Context/AuthContext";
 
-const Sidebar = ({ role }) => {
+const Sidebar = ({ role, startupState }) => {
   const location = useLocation();
 
   const { currentUser, logout } = useAuth();
@@ -115,7 +115,7 @@ const Sidebar = ({ role }) => {
                         {role.toUpperCase()}
                       </p>
                       <p
-                        className="text-sm my-1 font-medium truncate text-gray-300"
+                        className="text-sm my-1 font-medium truncate text-white"
                         role="none"
                       >
                         {currentUser.email}
@@ -149,7 +149,7 @@ const Sidebar = ({ role }) => {
           <ul className="space-y-3 font-medium">
             <CustomLink to="/dashboard">
               <svg
-                className="flex-shrink-0 w-5 h-5 text-gray-300 transition duration-75"
+                className="flex-shrink-0 w-5 h-5 text-white transition duration-75"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
@@ -161,10 +161,10 @@ const Sidebar = ({ role }) => {
               <span className="ms-3">Dashboard</span>
             </CustomLink>
 
-            {role === "startup" && (
+            {(role === "startup" && startupState === "inactive") && (
               <CustomLink to="/dashboard/publicise">
                 <svg
-                  className="flex-shrink-0 w-5 h-5 text-gray-300 transition duration-75"
+                  className="flex-shrink-0 w-5 h-5 text-white transition duration-75"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
@@ -177,29 +177,74 @@ const Sidebar = ({ role }) => {
               </CustomLink>
             )}
 
-            <CustomLink to="/dashboard/history">
+            {(role === "startup" && startupState === "active") && 
+              <CustomLink to="/dashboard/viewyourstartup">
               <svg
+                className="flex-shrink-0 w-5 h-5 text-white transition duration-75"
                 aria-hidden="true"
-                focusable="false"
-                data-prefix="fas"
-                data-icon="calendar-days"
-                className="svg-inline--fa fa-calendar-days w-5 h-5"
-                role="img"
                 xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 448 512"
+                fill="currentColor"
+                viewBox="0 0 22 21"
               >
-                <path
-                  fill="currentColor"
-                  d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm64 80v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm128 0v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H208c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H336zM64 400v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H208zm112 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H336c-8.8 0-16 7.2-16 16z"
-                ></path>
+                <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
+                <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
               </svg>
-              <span className="ms-3">History</span>
+              <span className="ms-3">Startup Growth</span>
             </CustomLink>
+            }
+
+            {role === "startup" && (
+              <CustomLink to="/dashboard/fundings">
+                <svg
+                  className="flex-shrink-0 w-5 h-5 text-white transition duration-75"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 22 21"
+                >
+                  <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
+                  <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
+                </svg>
+                <span className="ms-3">Fundings</span>
+              </CustomLink>
+            )}
+
+            {role === "investor" && (
+              <CustomLink to="/dashboard/topten">
+                <svg
+                  className="flex-shrink-0 w-5 h-5 text-white transition duration-75"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 22 21"
+                >
+                  <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
+                  <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
+                </svg>
+                <span className="ms-3">Top Startups</span>
+              </CustomLink>
+            )}
+
+            {role === "investor" && (
+              <CustomLink to="/dashboard/funded">
+                <svg
+                  className="flex-shrink-0 w-5 h-5 text-white transition duration-75"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 22 21"
+                >
+                  <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
+                  <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
+                </svg>
+                <span className="ms-3">Funded</span>
+              </CustomLink>
+            )}
           </ul>
           <ul className="pt-4 mt-4 space-y-3 font-medium border-t border-gray-700">
             <CustomLink to="/dashboard/upgrade-to-pro">
               <svg
-                className="flex-shrink-0 w-5 h-5 text-gray-300 transition duration-75"
+                className="flex-shrink-0 w-5 h-5 text-white transition duration-75"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
@@ -211,7 +256,7 @@ const Sidebar = ({ role }) => {
             </CustomLink>
             <CustomLink to="/dashboard/documentation">
               <svg
-                className="flex-shrink-0 w-5 h-5 text-gray-300 transition duration-75"
+                className="flex-shrink-0 w-5 h-5 text-white transition duration-75"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
@@ -223,7 +268,7 @@ const Sidebar = ({ role }) => {
             </CustomLink>
             <CustomLink to="/dashboard/support">
               <svg
-                className="flex-shrink-0 w-5 h-5 text-gray-300 transition duration-75"
+                className="flex-shrink-0 w-5 h-5 text-white transition duration-75"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
@@ -250,7 +295,7 @@ function CustomLink({ to, children, ...props }) {
         {...props}
         className={
           isActive
-            ? "flex items-center p-2 bg-gradient-to-br from-green-400 to-emerald-600 border-2 border-green-400 text-white rounded-lg group"
+            ? "flex items-center p-2 bg-gradient-to-br from-green-400 to-emerald-600 border-2 border-green-400 text-slate-950 font-bold rounded-lg group"
             : "flex items-center p-2 rounded-lg text-white  hover:bg-gray-700 group"
         }
       >

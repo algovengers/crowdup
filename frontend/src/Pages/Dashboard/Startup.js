@@ -1,6 +1,6 @@
 import React from "react";
-import StartupPaymentCard from "../Components/StartupPaymentCard.jsx";
-import Tag from "../Components/Tag.jsx";
+import StartupPaymentCard from "../../Components/DashboardComponents/StartupPaymentCard.jsx";
+import Tag from "../../Components/DashboardComponents/Tag.jsx";
 // import Navbar from '../Components/Navbar'
 import Markdown from "react-markdown";
 import { Link } from "react-router-dom";

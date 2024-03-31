@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useAuth } from "../../Context/AuthContext";
-import axios from "axios";
+import StartupDashboard from "../../Components/DashboardComponents/StartupDashboard";
+import InvestorDashboard from "../../Components/DashboardComponents/InvestorDashboard";
 
-const DashboardHome = ({ role }) => {
+
+const DashboardHome = ({ role, startupState }) => {
   const { currentUser } = useAuth();
 
   const currentTime = new Date();
@@ -21,6 +23,7 @@ const DashboardHome = ({ role }) => {
 
   return (
     <>
+    <div className="p-4 pt-20 min-h-screen lg:ml-64">
       <div
         className="bg-transparent overflow-hidden p-4 md:p-6 rounded mb-8 relative bg-cover"
         style={{ backgroundImage: "url(/dbbg.webp)" }}
@@ -36,78 +39,14 @@ const DashboardHome = ({ role }) => {
         </div>
       </div>
       {role === "startup" ? (
-        <StartupDashboard currentUser={currentUser} />
+        <StartupDashboard currentUser={currentUser} startupState={startupState} />
       ) : (
-        <InvestorDashboard currentUser={currentUser} />
+        <InvestorDashboard currentUser={currentUser} startupState={startupState} />
       )}
+      </div>
     </>
   );
 };
 
-function StartupDashboard({ currentUser }) {
-  const [startupState, setStartupState] = useState("loading");
-
-  useEffect(() => {
-    const nodeEnv = process.env.REACT_APP_NODE_ENV;
-    const baseUrl =
-      nodeEnv === "production"
-        ? "https://crowdup-dummy-backend.vercel.app"
-        : "http://localhost:5000";
-    const isActiveStartup = async () => {
-      try {
-        const response = await axios.get(
-          baseUrl + "/api/startups/isactive/" + currentUser?.uid,
-          {
-            withCredentials: true,
-          }
-        );
-        console.log(response.data);
-        if (!response.data.exists) {
-          console.log("User not present in database");
-          setStartupState("inactive");
-        } else {
-          setStartupState(
-            response.data?.active === true ? "active" : "inactive"
-          );
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    isActiveStartup();
-  }, [currentUser?.uid]);
-
-  return (
-    <div>
-      {startupState === "loading" && (
-        <div>
-          <p>Loading ...</p>
-        </div>
-      )}
-      {startupState === "inactive" && (
-        <div>
-          <button>Create</button>
-        </div>
-      )}
-      {startupState === "active" && (
-        <div>
-          <p>Startup data</p>
-        </div>
-      )}
-      {startupState === "error" && (
-        <div>
-          <p>Error</p>
-        </div>
-      )}
-    </div>
-  );
-}
-function InvestorDashboard() {
-  return (
-    <div>
-      <button>Invest</button>
-    </div>
-  );
-}
 
 export default DashboardHome;

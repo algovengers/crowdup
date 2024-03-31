@@ -1,6 +1,7 @@
 import React from "react";
+import TopComponent from "../ui/TopComponent";
 
-const TopNotch = () => {
+const TopNotch = ({ page }) => {
   return (
     <section
       id="recents"
@@ -19,60 +20,46 @@ const TopNotch = () => {
         </div>
       </div>
 
-      {/*<div className="flex my-10 flex-col items-center gap-10 px-2 sm:px-10">
+      <div className="flex my-10 flex-col items-center gap-10 px-2 sm:px-10">
         <ul className="w-full gap-10 flex flex-wrap justify-center items-center">
           <TopComponent
+            page={page}
             ranking={1}
             fundingReq={500}
             fundingReceived={90000}
-            domain='Farming'
-            title='InnovizeHub'
+            domain="Farming"
+            title="InnovizeHub"
             description="InnovizeHub is a startup that is working on the development of a new technology that will help farmers to increase their productivity. The startup has raised $90,000 in funding and is looking for more investors to help them grow."
             userPhoto={"/ogog.webp"}
             userName={"John Doe"}
+            action="donate"
           />
           <TopComponent
+            page={page}
             ranking={2}
             fundingReq={500}
             fundingReceived={90000}
-            domain='Farming'
-            title='InnovizeHub'
+            domain="Farming"
+            title="InnovizeHub"
             description="InnovizeHub is a startup that is working on the development of a new technology that will help farmers to increase their productivity. The startup has raised $90,000 in funding and is looking for more investors to help them grow."
             userPhoto={"/ogog.webp"}
             userName={"John Doe"}
+            action="donate"
           />
           <TopComponent
+            page={page}
             ranking={3}
             fundingReq={500}
             fundingReceived={90000}
-            domain='Farming'
-            title='InnovizeHub'
+            domain="Farming"
+            title="InnovizeHub"
             description="InnovizeHub is a startup that is working on the development of a new technology that will help farmers to increase their productivity. The startup has raised $90,000 in funding and is looking for more investors to help them grow."
             userPhoto={"/ogog.webp"}
             userName={"John Doe"}
-          />
-          <TopComponent
-            ranking={4}
-            fundingReq={500}
-            fundingReceived={90000}
-            domain='Farming'
-            title='InnovizeHub'
-            description="InnovizeHub is a startup that is working on the development of a new technology that will help farmers to increase their productivity. The startup has raised $90,000 in funding and is looking for more investors to help them grow."
-            userPhoto={"/ogog.webp"}
-            userName={"John Doe"}
-          />
-          <TopComponent
-            ranking={5}
-            fundingReq={500}
-            fundingReceived={90000}
-            domain='Farming'
-            title='InnovizeHub'
-            description="InnovizeHub is a startup that is working on the development of a new technology that will help farmers to increase their productivity. The startup has raised $90,000 in funding and is looking for more investors to help them grow."
-            userPhoto={"/ogog.webp"}
-            userName={"John Doe"}
+            action="donate"
           />
         </ul>
-  </div>*/}
+      </div>
     </section>
   );
 };

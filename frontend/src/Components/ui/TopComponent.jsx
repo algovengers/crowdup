@@ -1,36 +1,50 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function getCurrentDateTime() {
   const now = new Date();
-  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
   const day = now.getDate();
   const monthIndex = now.getMonth();
   const year = now.getFullYear();
   const hours = now.getHours();
   const minutes = now.getMinutes();
-  const ampm = hours >= 12 ? 'PM' : 'AM';
+  const ampm = hours >= 12 ? "PM" : "AM";
   const formattedHours = hours % 12 || 12;
-  const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+  const formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
   return `${monthNames[monthIndex]} ${day}, ${year}. ${formattedHours}:${formattedMinutes} ${ampm}`;
- }
+}
 
- function formatFunding(funding) {
+function formatFunding(funding) {
   if (funding >= 1000000000) {
-     return `${(funding / 1000000000).toFixed(2)}B`;
+    return `${(funding / 1000000000).toFixed(2)}B`;
   } else if (funding >= 1000000) {
-     return `${(funding / 1000000).toFixed(2)}M`;
+    return `${(funding / 1000000).toFixed(2)}M`;
   } else if (funding >= 1000) {
-     return `${(funding / 1000).toFixed(2)}K`;
+    return `${(funding / 1000).toFixed(2)}K`;
   } else {
-     return `${funding}`;
+    return `${funding}`;
   }
- }
+}
 
- function truncateString (str, num) {
+function truncateString(str, num) {
   if (str.length <= num) {
-    return str
+    return str;
   }
-  return str.slice(0, num) + '...'
+  return str.slice(0, num) + "...";
 }
 
 const TopComponent = ({
@@ -41,7 +55,9 @@ const TopComponent = ({
   fundingReq,
   fundingReceived,
   domain,
-  ranking
+  ranking,
+  action,
+  page,
 }) => {
   return (
     <li className="flex justify-center">
@@ -53,11 +69,19 @@ const TopComponent = ({
         }}
       >
         <div className="text-slate-950 flex items-center justify-between p-4">
-          <img src={`/images/${ranking}.webp`} alt="" className="w-12 h-12 backdrop-blur-3xl rounded-full" />
+          <img
+            src={`/images/${ranking}.webp`}
+            alt=""
+            className="w-12 h-12 backdrop-blur-3xl rounded-full"
+          />
           <h2 className="text-2xl px-2 break-all line-clamp-1 font-bold flex justify-center items-center">
             Need Rs. {fundingReq}
           </h2>
-          <img src="/ogog.webp" alt="" className="w-12 h-12 backdrop-blur-3xl rounded-full" />
+          <img
+            src="/ogog.webp"
+            alt=""
+            className="w-12 h-12 backdrop-blur-3xl rounded-full"
+          />
         </div>
 
         <div className="group relative flex w-full max-w-[400px] flex-col overflow-hidden rounded-xl shadow-md hover:shadow-lg bg-gradient-to-t from-emerald-400 via-green-400 to-lime-200 border-t-4 border-slate-700">
@@ -76,12 +100,14 @@ const TopComponent = ({
             <p className="text-3xl font-bold tracking-wide md:text-4xl line-clamp-2 flex-1 bg-gradient-to-br from-slate-950 to-green-800 transition-all bg-clip-text text-transparent hover:bg-gradient-to-tl">
               {title}
             </p>
-            <p className="text-gray-900 line-clamp-4 h-24">
-              {description}
-            </p>
+            <p className="text-gray-900 line-clamp-4 h-24">{description}</p>
             <div className="flex-between w-full">
               <div className="flex items-center gap-4">
-                <img className="w-10 h-10 rounded-full" src={userPhoto} alt="" />
+                <img
+                  className="w-10 h-10 rounded-full"
+                  src={userPhoto}
+                  alt=""
+                />
                 <div className="font-medium text-black">
                   <div>{userName}</div>
                   <div className="text-sm text-gray-800">Founder</div>
@@ -89,24 +115,32 @@ const TopComponent = ({
               </div>
             </div>
 
-            <button className="bg-gradient-to-br from-green-600 shadow-2xl mt-2 shadow-green-900 border-2 border-green-400 rounded-xl text-white font-semibold text-base tracking-wide to-emerald-700 py-2 px-4 hover:bg-gradient-to-tl hover:scale-105 transition-all ease-in-out duration-200 flex justify-center items-center">
-              Donate Rs. {fundingReq}
-              <svg
-                aria-hidden="true"
-                focusable="false"
-                data-prefix="fas"
-                data-icon="arrow-right"
-                className="svg-inline--fa fa-arrow-right ml-2 pt-1"
-                role="img"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 448 512"
-              >
-                <path
-                  fill="currentColor"
-                  d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"
-                ></path>
-              </svg>
-            </button>
+            <Link
+              to={page}
+              className="bg-gradient-to-br from-green-600 shadow-2xl mt-2 shadow-green-900 border-2 border-green-400 rounded-xl text-white font-semibold text-base tracking-wide to-emerald-700 py-2 px-4 hover:bg-gradient-to-tl hover:scale-105 transition-all ease-in-out duration-200 flex justify-center items-center"
+            >
+              {action === "donate" && (
+                <>
+                  Donate Rs. {fundingReq}
+                  <svg
+                    aria-hidden="true"
+                    focusable="false"
+                    data-prefix="fas"
+                    data-icon="arrow-right"
+                    className="svg-inline--fa fa-arrow-right ml-2 pt-1"
+                    role="img"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 448 512"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"
+                    ></path>
+                  </svg>
+                </>
+              )}
+              {action === "view" && <>View Details</>}
+            </Link>
           </div>
         </div>
       </div>

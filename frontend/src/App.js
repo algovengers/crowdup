@@ -7,7 +7,7 @@ import Signup from "./Pages/Signup";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Role from "./Pages/Role";
 import NotFound from "./Pages/NotFound";
-import Startup from "./Pages/Startup";
+import Startup from "./Pages/Dashboard/Startup";
 
 function App() {
   return (

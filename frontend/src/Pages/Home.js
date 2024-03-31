@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useAuth } from "../Context/AuthContext";
 import HeroSection from "../Components/Sections/HeroSection";
-import Navbar from "../Components/Navbar";
+import Navbar from "../Components/ui/Navbar";
 import FeaturesSection from "../Components/Sections/FeaturesSection";
 import TeamsSection from "../Components/Sections/TeamsSection";
-import Footer from "../Components/Footer";
+import Footer from "../Components/ui/Footer";
 import TopNotch from "../Components/Sections/TopNotch";
 
 const Home = () => {
@@ -38,7 +38,7 @@ const Home = () => {
 
       <FeaturesSection />
 
-      <TopNotch />
+      <TopNotch page={page} />
 
       <TeamsSection />
 
