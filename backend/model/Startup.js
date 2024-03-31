@@ -2,7 +2,9 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const startupSchema = new Schema({
+
   useruid: { type: String, required: true, unique: true},
+
   name: { type: String, required: true },
   description: { type: String, required: true },
   report: { type: String }, // URL of the report we will store in the cloudinary
