@@ -1,11 +1,18 @@
 const { User } = require("../model/User");
 const { Payment } = require("../model/Payment");
+const otpStore = require("../config/otpStore");
 
 async function payment(req, res) {
-  const { useruid, amount, startupid } = req.body;
+  const { useruid, amount, startupid, otp } = req.body;
   try {
     const user = await User.findOne(useruid);
     if (user) {
+      if (!user.email) {
+        return res.status(200).json({ msg: "error user.email" });
+      }
+      if (otpStore[user.email] != otp) {
+        return res.status(200).json({ msg: "invalid_otp" });
+      }
       const payment = await Payment.create({
         user: user._id,
         startup: startupid,
