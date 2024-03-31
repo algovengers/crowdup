@@ -10,9 +10,10 @@ async function payment(req, res) {
   try {
     // if user exists
     const user = await User.findOne({ useruid });
+    console.log(user)
     if (user) {
       // if email exists (not imp although)
-      if (!user.email) {
+      if (user && !(user?.email)) {
         return res.status(200).json({ msg: "error user.email" });
       }
       // if otp already sent or not
@@ -31,20 +32,20 @@ async function payment(req, res) {
       }
 
       // *** doing payment
-      const pmnt = await Payment.create({
-
-        user: user._id,
-        startup: startupid,
-        amount,
-      });
-
-      if (pmnt) {
+      
+      // if (pmnt) {
         // checking if user has enough money in wallet
-        const user = await User.findOne({ useruid });
-
+        // const user = await User.findOne({ useruid });
+        
         if (Number(user.moneyWallet) < Number(amount)) {
           return res.status(200).json({ msg: "not_enough_money" });
         }
+        const pmnt = await Payment.create({
+  
+          user: useruid,
+          startup: startupid,
+          amount,
+        });
 
         // reducing moneyWallet of user
         const data = await User.findOneAndUpdate(
@@ -65,9 +66,9 @@ async function payment(req, res) {
             res.status(200).json({ msg: "error update startup" });
           }
 
-        } else {
-          res.status(200).json({ msg: "error update user wallet" });
-        }
+        // } else {
+          // res.status(200).json({ msg: "error update user wallet" });
+        // }
       } else {
         res.status(200).json({ msg: "error payment" });
       }
