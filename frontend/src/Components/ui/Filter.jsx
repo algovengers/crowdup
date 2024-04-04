@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 
 function Filter({ data, setData }) {
+  
   const handleFormSubmit = (e) => {
     e.preventDefault();
     console.log(e.target.query.value);

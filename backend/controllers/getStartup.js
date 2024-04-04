@@ -27,11 +27,13 @@ const getStartupList = async (req, res) => {
 const getStartup = async (req, res) => {
   try {
     const id = req?.params.id;
+    console.log(id)
     if (!id) {
       res.status(404).json({ message: "invalid id" });
       return;
     }
-    const data = await Startup.findbyId(id).lean();
+    const data = await Startup.find({_id : id});
+    console.log(data)
     res.status(200).json({ data: data });
   } catch (error) {
     res.status(500).json({ message: "Error" });

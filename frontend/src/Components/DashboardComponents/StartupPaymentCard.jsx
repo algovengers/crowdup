@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import PaymentCard from "../Payment/PaymentCard";
 
-function StartupPaymentCard() {
+function StartupPaymentCard({data}) {
   const [percentage, setPercentage] = useState(0);
-  const [funded, setFunded] = useState(200);
-  const [required, setRequired] = useState(1000);
+  const [funded, setFunded] = useState(data?.fundsRecieved ?? 0);
+  const [required, setRequired] = useState(data?.fundsRequired ?? 0);
   useEffect(() => {
     const progress = () => {
       let percent = Math.min((funded / required) * 100, 100);
@@ -17,6 +17,10 @@ function StartupPaymentCard() {
     progress();
     console.log(percentage);
   }, [required, funded, percentage]);
+  useEffect(()=>{
+    setFunded(data?.fundsRecieved)
+    setRequired(data?.fundsRequired)
+  },[data?.fundsRecieved])
   const [showModal,setShowModal] = useState(false)
 
 
@@ -26,12 +30,12 @@ function StartupPaymentCard() {
       <div className=" flex flex-row items-center gap-2">
         <div>
           <img
-            src="https://picsum.photos/200"
+            src={data?.logo}
             alt=""
-            className="rounded-full h-16"
+            className="rounded-full h-16 w-16"
           />
         </div>
-        <div>OPENAI</div>
+        <div>{data?.name}</div>
       </div>
       <div className=" w-full bg-gray-600 rounded">
         <div
@@ -51,15 +55,18 @@ function StartupPaymentCard() {
       </div>
       <div>
         <button className="w-full py-3 px-8 bg-green-300 rounded">
+          <a href={data?.report} download={data?.report}>
           Download Pdf Report
+
+          </a>
         </button>
       </div>
       <div>
-        <a href="https://chat.openai.com/" className="text-sm text-blue-500">
-          https://chat.openai.com/
+        <a href={data?.websiteLink} className="text-sm text-blue-500">
+         {data?.websiteLink}
         </a>
       </div>
-      <div className="text-lg">Stocks Left : 3000</div>
+      {/* <div className="text-lg">Stocks Left : 3000</div> */}
     </div>
   );
 }
