@@ -11,6 +11,6 @@ router.post("/create", uploadFiles, createStartup);
 router.get("/isactive/:useruid", isActiveStartup);
 
 router.get("/explore",getStartupList)
-router.get('startup/:id',getStartup)
+router.get('/data/:id',getStartup)
 
 module.exports = router;
