@@ -38,6 +38,5 @@ Visit the site here - [Crowd-Up](https://crowd-up.vercel.app/)
 ## Authors
 
 - Subharthi Hazra - [@subharthihazra](https://github.com/subharthihazra)
-- Subhadeep Roy - [@subhadeeproy3902](https://git.new/Subha)
 - Afeef Uddin - [@afeefuddin](https://github.com/afeefuddin/)
 - Rohit Kumar - [@rohitt24k](https://github.com/rohitt24k/)
