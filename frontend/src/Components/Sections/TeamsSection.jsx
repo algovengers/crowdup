@@ -32,11 +32,6 @@ const TeamsSection = () => {
             imageSrc="https://i.postimg.cc/vZyv96vr/image.png"
           />
           <TeamCard
-            name="Subhadeep Roy"
-            profession="Frontend Dev"
-            imageSrc="https://i.postimg.cc/3NMtcf26/image.png"
-          />
-          <TeamCard
             name="Rohit Kumar"
             profession="Frontend Dev"
             imageSrc="https://i.postimg.cc/DfjVxnN4/image.png"
